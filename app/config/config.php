@@ -1,5 +1,5 @@
 <?php
 
-define('HG-API-KEY', '8b222691');
+define('HG_API_KEY', '8b222691');
 
 ?>

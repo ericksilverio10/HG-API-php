@@ -1,8 +1,23 @@
+<?php
+  require_once 'app/config/config.php';
+  require_once 'app/modules/hg-api.php';
+
+  $hg = new HG_API(HG_API_KEY);
+  $dolar = $hg -> dolar_quotation();
+  $wheater = $hg -> request('weather');
+
+  $wheater_data = $wheater['results']['description'];
+
+  echo $wheater_data;
+
+?>
+
 <!doctype html>
 <html lang="pt-br">
   <head>
-    <i class="fa fa-user" aria-hidden="true"></i>
     <title>Cotação Dólar</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,7 +31,11 @@
         <div class="row">
           <div class="col-12">
             <p>Cotação Dólar</p>
-            <p>USD <span class="badge badge-pill badge-primary">XXXXX</span></p>
+            <?php if($dolar['variation'] > 0):?>
+              <p>USD <span class="badge badge-pill badge-primary"><?= $dolar['buy']?></span><i class="fa fa-arrow-up" aria-hidden="true"></i><?=$dolar['variation']?></p>
+            <?php else:?>
+              <p>USD <span class="badge badge-pill badge-danger"><?= $dolar['buy']?></span><i class="fa fa-arrow-down" aria-hidden="true"></i><?=$dolar['variation']?></p>
+            <?php endif?>
           </div>
         </div>
       </div>
@@ -29,3 +48,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
+
+<style>
+  i{
+    padding: 0 10px;
+  }
+</style>
