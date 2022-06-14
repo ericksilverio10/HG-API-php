@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <i class="fa fa-user" aria-hidden="true"></i>
-    <title>Title</title>
+    <title>Cotação Dólar</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +11,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-      <button type="button" class="btn btn-outline-primary"><i class="fas fa-user"></i> Usuário</button>
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <p>Cotação Dólar</p>
+            <p>USD <span class="badge badge-pill badge-primary">XXXXX</span></p>
+          </div>
+        </div>
+      </div>
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
