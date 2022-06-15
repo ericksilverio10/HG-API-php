@@ -4,12 +4,12 @@
 
   $hg = new HG_API(HG_API_KEY);
   $dolar = $hg -> dolar_quotation();
-  $wheater = $hg -> request('weather');
+  $wheater = $hg -> request_weather('449648');
+  $wheater_data = $wheater['results'];
 
-  $wheater_data = $wheater['results']['description'];
-
-  echo $wheater_data;
-
+  $temp = $wheater_data['temp'] . '°C';
+  $city = $wheater_data['city'];
+  $description = $wheater_data['description'];
 ?>
 
 <!doctype html>
@@ -27,15 +27,32 @@
   </head>
   <body>
       
-      <div class="container">
+      <div class="container-finance">
         <div class="row">
           <div class="col-12">
-            <p>Cotação Dólar</p>
-            <?php if($dolar['variation'] > 0):?>
+            <h4>Cotação Dólar</h4>
+            <?php if($dolar['variation'] >= 0):?>
               <p>USD <span class="badge badge-pill badge-primary"><?= $dolar['buy']?></span><i class="fa fa-arrow-up" aria-hidden="true"></i><?=$dolar['variation']?></p>
             <?php else:?>
               <p>USD <span class="badge badge-pill badge-danger"><?= $dolar['buy']?></span><i class="fa fa-arrow-down" aria-hidden="true"></i><?=$dolar['variation']?></p>
             <?php endif?>
+          </div>
+        </div>
+      </div>
+      <div class="container-wheater">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title"><?=$city?></h4>
+                <h6 class="card-subtitle text-muted"><?=$description?></h6>
+                <?php if($temp > 20):?>
+                <h4 class="card-title temp"><?=$temp?><i class="fa-solid fa-temperature-arrow-up"></i></h4>
+                <?php else:?>
+                <h4 class="card-title temp"><?=$temp?> <i class="fa-solid fa-temperature-arrow-down"></i></h4>
+                <?php endif?>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -52,5 +69,26 @@
 <style>
   i{
     padding: 0 10px;
+  }
+  .container-wheater{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+  }
+  .container-finance{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding-top: 20px;
+  }
+  .temp {
+    font-size: 50px;
+    padding: 20px 0;
+  }
+  .fa-temperature-arrow-down{
+    color: #3e77b6;
+  }
+  .fa-temperature-arrow-up{
+    color: #f13a37;
   }
 </style>
