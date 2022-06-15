@@ -4,12 +4,11 @@
 
   $hg = new HG_API(HG_API_KEY);
   $dolar = $hg -> dolar_quotation();
-  $wheater = $hg -> request_weather('449648');
-  $wheater_data = $wheater['results'];
 
-  $temp = $wheater_data['temp'] . '°C';
-  $city = $wheater_data['city'];
-  $description = $wheater_data['description'];
+  $sbc = $hg -> request_weather('449648');
+  $salvador = $hg -> request_weather('455826');
+  $rj = $hg -> request_weather('455825');
+
 ?>
 
 <!doctype html>
@@ -32,9 +31,9 @@
           <div class="col-12">
             <h4>Cotação Dólar</h4>
             <?php if($dolar['variation'] >= 0):?>
-              <p>USD <span class="badge badge-pill badge-primary"><?= $dolar['buy']?></span><i class="fa fa-arrow-up" aria-hidden="true"></i><?=$dolar['variation']?></p>
+              <p>USD <span class="badge badge-pill badge-primary"><?= $dolar['buy']?></span><i class="fa fa-arrow-up" aria-hidden="true"></i></p>
             <?php else:?>
-              <p>USD <span class="badge badge-pill badge-danger"><?= $dolar['buy']?></span><i class="fa fa-arrow-down" aria-hidden="true"></i><?=$dolar['variation']?></p>
+              <p>USD <span class="badge badge-pill badge-danger"><?= $dolar['buy']?></span><i class="fa fa-arrow-down" aria-hidden="true"></i></p>
             <?php endif?>
           </div>
         </div>
@@ -44,12 +43,46 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title"><?=$city?></h4>
-                <h6 class="card-subtitle text-muted"><?=$description?></h6>
-                <?php if($temp > 20):?>
-                <h4 class="card-title temp"><?=$temp?><i class="fa-solid fa-temperature-arrow-up"></i></h4>
+                <h4 class="card-title"><?=$sbc['city']?></h4>
+                <h6 class="card-subtitle text-muted"><?=$sbc['description']?></h6>
+                <?php if($sbc['temp'] > 20):?>
+                <h4 class="card-title temp"><?=$sbc['temp']. "°C"?><i class="fa-solid fa-temperature-arrow-up"></i></h4>
                 <?php else:?>
-                <h4 class="card-title temp"><?=$temp?> <i class="fa-solid fa-temperature-arrow-down"></i></h4>
+                <h4 class="card-title temp"><?=$sbc['temp']. "°C"?> <i class="fa-solid fa-temperature-arrow-down"></i></h4>
+                <?php endif?>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-wheater">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title"><?=$salvador['city']?></h4>
+                <h6 class="card-subtitle text-muted"><?=$salvador['description']?></h6>
+                <?php if($salvador['temp'] > 20):?>
+                <h4 class="card-title temp"><?=$salvador['temp']. "°C"?><i class="fa-solid fa-temperature-arrow-up"></i></h4>
+                <?php else:?>
+                <h4 class="card-title temp"><?=$salvador['temp']. "°C"?> <i class="fa-solid fa-temperature-arrow-down"></i></h4>
+                <?php endif?>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-wheater">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title"><?=$rj['city']?></h4>
+                <h6 class="card-subtitle text-muted"><?=$rj['description']?></h6>
+                <?php if($rj['temp'] > 20):?>
+                <h4 class="card-title temp"><?=$rj['temp'] . "°C"?><i class="fa-solid fa-temperature-arrow-up"></i></h4>
+                <?php else:?>
+                <h4 class="card-title temp"><?=$rj['temp'] . "°C"?><i class="fa-solid fa-temperature-arrow-down"></i></h4>
                 <?php endif?>
               </div>
             </div>
@@ -67,8 +100,12 @@
 </html>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+  body{
+    font-family: 'Poppins';
+  }
   i{
-    padding: 0 10px;
+    padding: 0 6px;
   }
   .container-wheater{
     padding-left: 10px;

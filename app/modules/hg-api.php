@@ -42,7 +42,7 @@ class HG_API {
             $uri = substr($uri, 0, -1);
             $response = @file_get_contents($uri);
             $this -> error = false;
-            return json_decode($response, true);
+            return json_decode($response, true)['results'];
 
         } else{
             $this -> error = true;
